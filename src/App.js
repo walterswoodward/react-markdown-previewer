@@ -1,6 +1,11 @@
 import React, { Fragment, Component } from "react";
 import "./index.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCompress } from "@fortawesome/free-solid-svg-icons";
+
 const ReactMarkdown = require("react-markdown/with-html");
+
 
 class App extends Component {
   constructor(props) {
@@ -60,22 +65,22 @@ class App extends Component {
     ) {
       editorView = "editor_container";
       previewView = "preview_container";
-      editorToggleViewText = "Click to Maximize";
-      previewToggleViewText = "Click to Maximize";
+      editorToggleViewText = faExpandArrowsAlt;
+      previewToggleViewText = faExpandArrowsAlt;
     } else if (
       this.state.editorMaximized === true &&
       this.state.previewMaximized === false
     ) {
       editorView = "editor_container_maximized";
       previewView = "preview_container_minimized";
-      editorToggleViewText = "Click to Minimize";
+      editorToggleViewText = faCompress;
     } else if (
       this.state.previewMaximized === true &&
       this.state.editorMaximized === false
     ) {
       previewView = "preview_container_maximized";
       editorView = "editor_container_minimized";
-      previewToggleViewText = "Click to Minimize";
+      previewToggleViewText = faCompress;
     }
     return (
       <div className="container">
@@ -83,7 +88,7 @@ class App extends Component {
           <div id="editor_toolbar">
             <Toolbar text="Editor" />
             <div id="editor_toggleview" onClick={this.toggleEditorWindow}>
-              {editorToggleViewText}
+            <FontAwesomeIcon icon = {editorToggleViewText} />
             </div>
           </div>
           <Editor markdown={this.state.markdown} onChange={this.handleChange} />
@@ -92,7 +97,7 @@ class App extends Component {
           <div id="preview_toolbar">
             <Toolbar text="Previewer" />
             <div id="preview_toggleview" onClick={this.togglePreviewWindow}>
-              {previewToggleViewText}
+              <FontAwesomeIcon icon = {previewToggleViewText} />
             </div>
           </div>
           <div id="preview">
